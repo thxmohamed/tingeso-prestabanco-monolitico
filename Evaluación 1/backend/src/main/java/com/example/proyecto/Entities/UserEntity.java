@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "inmuebles")
+@Table(name = "Users")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
