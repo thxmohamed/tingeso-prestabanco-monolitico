@@ -16,8 +16,16 @@ public class CustomerService {
 
     }
 
+    public CustomerEntity getByEmail(String email){
+        return customerRepository.findByEmail(email);
+    }
+
     public CustomerEntity registerUser(CustomerEntity user){
         return customerRepository.save(user);
+    }
+
+    public CustomerEntity getCustomerById(Long id){
+        return customerRepository.findById(id).get();
     }
 
     public CustomerEntity login(CustomerEntity user){
@@ -28,10 +36,5 @@ public class CustomerService {
             }
         }
         return null;
-    }
-
-    public double creditSimulate(float amount, double interest, int years){
-        return (amount*interest*Math.pow((1 + interest), years))/
-                (Math.pow(1 + interest, years) - 1);
     }
 }

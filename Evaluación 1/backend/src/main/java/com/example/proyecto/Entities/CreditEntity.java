@@ -16,9 +16,10 @@ public class CreditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long clientID;
-    private int creditType;
+    private int loanType;
     private float requestedAmount;
-    private float yearsLimit;
+    private int yearsLimit;
+    private int yearsMax;
     private float interestRate;
     private int status;
     private float monthlyFee;

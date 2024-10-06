@@ -20,5 +20,6 @@ public abstract class UserEntity {
     @Column(unique = true)
     private String email;
     private String password;
+    private String rut;
 
 }
