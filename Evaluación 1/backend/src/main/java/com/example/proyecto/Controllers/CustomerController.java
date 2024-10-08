@@ -28,7 +28,6 @@ public class CustomerController {
     }
 
     @PostMapping("/register")
-
     public ResponseEntity<?> registerCustomer(@RequestBody CustomerEntity customer){
         try {
             CustomerEntity userDB = customerService.getByEmail(customer.getEmail());
@@ -39,6 +38,16 @@ public class CustomerController {
             return ResponseEntity.ok().body("customer successfully registered");
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Error registering customer: " + e.getMessage());
+        }
+    }
+
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> login(@RequestBody CustomerEntity customer){
+        CustomerEntity customerDB = customerService.login(customer);
+        if(customerDB != null){
+            return ResponseEntity.ok().body("Successful login");
+        }else{
+            return ResponseEntity.ok().body("Incorrect credentials");
         }
     }
 }

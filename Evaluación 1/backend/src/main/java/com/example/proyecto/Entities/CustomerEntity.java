@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Customers")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class CustomerEntity extends UserEntity{
     private float salary;
