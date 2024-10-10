@@ -1,29 +1,18 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../Dashboard.css';
+import { Link } from 'react-router-dom';
+import '../styles/Dashboard.css';
 
-function Dashboard() {
-  const navigate = useNavigate();
-
-  // Función para cerrar sesión
-  const handleLogout = () => {
-    // Aquí puedes eliminar cualquier información de sesión o token
-    alert('Has cerrado sesión exitosamente');
-    // Redirigir a la página de inicio de sesión
-    navigate('/');
-  };
-
+const Dashboard = () => {
   return (
     <div className="dashboard-container">
-      <h1>Bienvenido master, has iniciado sesión</h1>
-      <p>Has iniciado sesión exitosamente en PrestaBanco.</p>
-
-      {/* Botón para cerrar sesión */}
-      <button onClick={handleLogout} className="logout-btn">
-        Cerrar Sesión
-      </button>
+      <h1>Bienvenido al Dashboard</h1>
+      <div className="dashboard-buttons">
+        <button>Simular un crédito</button>
+        <button>Solicitar un crédito</button>
+        <button><Link to="/profile">Mi perfil</Link></button>
+      </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../Header.css';
+import '../styles/Header.css';
 
 function Header() {
   const location = useLocation();  // Hook para obtener la ubicación actual
