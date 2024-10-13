@@ -1,6 +1,7 @@
 package com.example.proyecto.Controllers;
 
 import com.example.proyecto.Entities.CreditEntity;
+import com.example.proyecto.Entities.DocumentEntity;
 import com.example.proyecto.Services.CreditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,9 @@ public class CreditController {
         return ResponseEntity.ok(creditService.saveCredit(credit));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<CreditEntity>> listCreditDocuments(@PathVariable Long id){
+        List<CreditEntity> credits = creditService.getClientCredits(id);
+        return ResponseEntity.ok(credits);
+    }
 }

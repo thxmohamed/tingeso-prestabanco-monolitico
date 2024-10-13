@@ -5,7 +5,7 @@ const getAll = () => {
 }
 
 const register = data => {
-    return httpClient.post("/customer/save", data)
+    return httpClient.post("/customer/register", data)
 }
 
 const get = id => {

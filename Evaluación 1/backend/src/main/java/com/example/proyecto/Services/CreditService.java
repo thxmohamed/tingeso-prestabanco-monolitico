@@ -19,4 +19,8 @@ public class CreditService {
     public CreditEntity saveCredit(CreditEntity credit){
         return creditRepository.save(credit);
     }
+
+    public ArrayList<CreditEntity> getClientCredits(Long id){
+        return creditRepository.findByClientID(id);
+    }
 }
