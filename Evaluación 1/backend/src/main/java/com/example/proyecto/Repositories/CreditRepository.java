@@ -8,7 +8,5 @@ import java.util.ArrayList;
 
 @Repository
 public interface CreditRepository extends JpaRepository<CreditEntity, Long>{
-    public ArrayList<CreditEntity> findByLoanType(int type);
     public ArrayList<CreditEntity> findByClientID(Long clientID);
-    public ArrayList<CreditEntity> findCreditEntitiesByYearsLimit(int yearsLimit);
 }

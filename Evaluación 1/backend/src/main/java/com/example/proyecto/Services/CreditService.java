@@ -17,9 +17,6 @@ public class CreditService {
     }
 
     public CreditEntity saveCredit(CreditEntity credit){
-        if(credit.getYearsLimit() <= credit.getYearsMax()){
-            return creditRepository.save((credit));
-        }
-        return null;
+        return creditRepository.save(credit);
     }
 }

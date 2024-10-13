@@ -3,6 +3,7 @@ package com.example.proyecto.Controllers;
 import com.example.proyecto.Entities.*;
 import com.example.proyecto.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,10 +45,10 @@ public class CustomerController {
     @PostMapping(path = "/login")
     public ResponseEntity<?> login(@RequestBody CustomerEntity customer){
         CustomerEntity customerDB = customerService.login(customer);
-        if(customerDB != null){
+        if (customerDB != null) {
             return ResponseEntity.ok().body("Successful login");
-        }else{
-            return ResponseEntity.ok().body("Incorrect credentials");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect credentials");
         }
     }
 }

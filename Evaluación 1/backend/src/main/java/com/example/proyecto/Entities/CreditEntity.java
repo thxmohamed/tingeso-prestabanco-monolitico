@@ -16,12 +16,30 @@ public class CreditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long clientID;
-    private int loanType;
+    @Enumerated(EnumType.STRING)
+    private LoanType loanType;
+    public enum LoanType {
+        PRIMERA_VIVIENDA,
+        SEGUNDA_VIVIENDA,
+        PROPIEDADES_COMERCIALES,
+        REMODELACION
+    }
     private float requestedAmount;
     private int yearsLimit;
-    private int yearsMax;
     private float interestRate;
-    private int status;
-    private float monthlyFee;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
+    public enum Status{
+        E1_EN_REVISION_INICIAL,
+        E2_PENDIENTE_DOCUMENTACION,
+        E3_EN_EVALUACION,
+        E4_PRE_APROBADA,
+        E5_EN_APROBACION_FINAL,
+        E6_APROBADA,
+        E7_RECHAZADA,
+        E8_CANCELADA_POR_CLIENTE,
+        E9_EN_DESEMBOLSO
+    };
+    private float monthlyFee;
 }
