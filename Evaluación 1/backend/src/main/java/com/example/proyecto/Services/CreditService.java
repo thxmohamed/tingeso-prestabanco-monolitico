@@ -23,4 +23,12 @@ public class CreditService {
     public ArrayList<CreditEntity> getClientCredits(Long id){
         return creditRepository.findByClientID(id);
     }
+
+    public double creditSimulate(CreditEntity credit){
+        double interest = credit.getInterestRate()/12/100;
+        int months = credit.getYearsLimit()*12;
+        float amount = credit.getRequestedAmount();
+        return (amount*interest*Math.pow((1 + interest), months))/
+                (Math.pow(1 + interest, months) - 1);
+    }
 }

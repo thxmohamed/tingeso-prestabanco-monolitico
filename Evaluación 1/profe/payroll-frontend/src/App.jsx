@@ -1,37 +1,41 @@
-import './App.css'
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Navbar from "./components/Navbar"
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import Login from './components/Login';
 import Home from './components/Home';
-import EmployeeList from './components/EmployeesList';
-import AddEditEmployee from './components/AddEditEmployee';
-import ExtraHoursList from './components/ExtraHoursList';
-import AddEditExtraHours from './components/AddEditExtraHours';
-import NotFound from './components/NotFound';
-import PaycheckList from './components/PaycheckList';
-import PaycheckCalculate from './components/PaycheckCalculate';
-import AnualReport from './components/AnualReport';
+import Register from './components/Register';
+import './App.css'
+import MyProfile from './components/MyProfile';
+import CreditSimulate from './components/CreditSimulate'
+import CreditApplication from './components/CreditApplication';
+//import CreditApplication from './components/CreditApplication'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
-      <Router>
-          <div className="container">
-          <Navbar></Navbar>
-            <Routes>
-              <Route path="/home" element={<Home/>} />
-              <Route path="/employee/list" element={<EmployeeList/>} />
-              <Route path="/employee/add" element={<AddEditEmployee/>} />
-              <Route path="/employee/edit/:id" element={<AddEditEmployee/>} />
-              <Route path="/paycheck/list" element={<PaycheckList/>} />
-              <Route path="/paycheck/calculate" element={<PaycheckCalculate/>} />
-              <Route path="/reports/AnualReport" element={<AnualReport/>} />
-              <Route path="/extraHours/list" element={<ExtraHoursList/>} />
-              <Route path="/extraHours/add" element={<AddEditExtraHours/>} />
-              <Route path="/extraHours/edit/:id" element={<AddEditExtraHours/>} />
-              <Route path="*" element={<NotFound/>} />
-            </Routes>
-          </div>
-      </Router>
+    <Router>
+      <div className="App">
+
+        <Routes>
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={isLoggedIn ? <Home /> : <Navigate to="/login" />} />
+          <Route path="/profile" element={<MyProfile />} />
+          <Route path="/simulate" element={<CreditSimulate />} />
+          <Route path="/application" element={<CreditApplication />} />
+          <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-export default App
+export default App;

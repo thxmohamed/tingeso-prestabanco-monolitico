@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface DocumentRepository extends JpaRepository<DocumentEntity, Long> {
     public List<DocumentEntity> findByCreditID(Long id);
+
+    public DocumentEntity findByFileData(byte[] filedata);
 }

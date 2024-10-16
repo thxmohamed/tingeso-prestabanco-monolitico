@@ -8,20 +8,26 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "Users")
-@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class UserEntity {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String lastName;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+    public enum Rol{
+        CUSTOMER,
+        EXECUTIVE
+    }
     @Column(unique = true)
     private String email;
     private String password;
     @Column(unique = true)
     private String rut;
+    private int age;
 
 }

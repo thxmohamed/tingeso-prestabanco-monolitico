@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Register.css';
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 import userService from '../services/user.service';
 
 function Register() {
@@ -15,9 +15,10 @@ function Register() {
 
   const [errors, setErrors] = useState({
     rut: '',
-    edad: '',
     salario: ''
   });
+
+  const navigate = useNavigate(); // Inicializamos useNavigate
 
   // Validar formato del RUT
   const validateRut = (rut) => {
@@ -77,7 +78,7 @@ function Register() {
     };
 
     try {
-      // Llamada al servicio `register` en lugar de `fetch`
+      // Llamada al servicio `register`
       const response = await userService.register(customerData);
 
       alert('Registro exitoso!');
@@ -95,11 +96,16 @@ function Register() {
     }
   };
 
+  // Función para volver al login
+  const goToLogin = () => {
+    navigate('/login'); // Redirigir a la página de login
+  };
+
   return (
-    <div className="register-container">
-      <h2>Registro de Usuario</h2>
+    <div style={styles.registerContainer}>
+      <h2 style={styles.heading}>Registro de Usuario</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={styles.formGroup}>
           <label>Nombre:</label>
           <input
             type="text"
@@ -107,10 +113,11 @@ function Register() {
             value={form.nombre}
             onChange={handleChange}
             required
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>Apellido:</label>
           <input
             type="text"
@@ -118,10 +125,11 @@ function Register() {
             value={form.apellido}
             onChange={handleChange}
             required
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>Email:</label>
           <input
             type="email"
@@ -129,10 +137,11 @@ function Register() {
             value={form.email}
             onChange={handleChange}
             required
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>Contraseña:</label>
           <input
             type="password"
@@ -140,10 +149,11 @@ function Register() {
             value={form.password}
             onChange={handleChange}
             required
+            style={styles.input}
           />
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>RUT:</label>
           <input
             type="text"
@@ -151,13 +161,20 @@ function Register() {
             value={form.rut}
             onChange={handleChange}
             required
+            style={styles.input}
           />
-          {errors.rut && <p className="error">{errors.rut}</p>}
+          {errors.rut && <p style={styles.error}>{errors.rut}</p>}
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>Edad:</label>
-          <select name="edad" value={form.edad} onChange={handleChange} required>
+          <select
+            name="edad"
+            value={form.edad}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          >
             {[...Array(43)].map((_, index) => {
               const edad = index + 18;
               return (
@@ -169,7 +186,7 @@ function Register() {
           </select>
         </div>
 
-        <div>
+        <div style={styles.formGroup}>
           <label>Salario:</label>
           <input
             type="text"
@@ -177,14 +194,65 @@ function Register() {
             value={form.salario}
             onChange={handleChange}
             required
+            style={styles.input}
           />
-          {errors.salario && <p className="error">{errors.salario}</p>}
+          {errors.salario && <p style={styles.error}>{errors.salario}</p>}
         </div>
 
-        <button type="submit" className='btn-register'>Registrarse</button>
+        <button type="submit" style={styles.submitButton}>Registrarse</button>
       </form>
+
+      <button onClick={goToLogin} style={styles.loginButton}>Volver al Login</button>
     </div>
   );
 }
+
+// Estilos en línea
+const styles = {
+  registerContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    backgroundColor: '#f9f9f9',
+    padding: '20px',
+  },
+  heading: {
+    fontSize: '24px',
+    marginBottom: '20px',
+  },
+  formGroup: {
+    marginBottom: '15px',
+  },
+  input: {
+    width: '300px',
+    padding: '10px',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+  },
+  submitButton: {
+    padding: '10px 20px',
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '10px',
+  },
+  loginButton: {
+    padding: '10px 20px',
+    backgroundColor: '#6c757d',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    marginTop: '20px',
+  },
+  error: {
+    color: 'red',
+    fontSize: '12px',
+  },
+};
 
 export default Register;

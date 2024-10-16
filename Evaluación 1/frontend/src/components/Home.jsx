@@ -1,7 +1,7 @@
 import React from 'react';
 import "../styles/Dashboard.css"
 
-const Dashboard = () => {
+const Home = () => {
   return (
     <div className="dashboard-container">
       <h1>Bienvenido a Préstamos PrestaBanco</h1>
@@ -14,4 +14,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

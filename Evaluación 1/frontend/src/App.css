@@ -97,3 +97,22 @@ input:focus {
 .btn-login:hover {
   background-color: #ac0873;
 }
+
+.profile-container {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 50%;
+  background-color: #f9f9f9;
+}
+
+.profile-details {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+

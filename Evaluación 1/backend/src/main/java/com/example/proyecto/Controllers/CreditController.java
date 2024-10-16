@@ -32,4 +32,9 @@ public class CreditController {
         List<CreditEntity> credits = creditService.getClientCredits(id);
         return ResponseEntity.ok(credits);
     }
+    @PostMapping("/simulate")
+    public ResponseEntity<Double> simulateCredit(@RequestBody CreditEntity credit) {
+        double monthlyPayment = creditService.creditSimulate(credit);
+        return ResponseEntity.ok(monthlyPayment);
+    }
 }

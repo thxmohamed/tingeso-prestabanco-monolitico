@@ -24,5 +24,9 @@ public class DocumentService {
         return documentRepository.save(documentEntity);
     }
 
+    public DocumentEntity downloadFile(byte[] filedata){
+        return documentRepository.findByFileData(filedata);
+    }
+
 
 }

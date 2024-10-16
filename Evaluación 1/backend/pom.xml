@@ -71,6 +71,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>presta-banco-backend</finalName>
 	</build>
 
 </project>
