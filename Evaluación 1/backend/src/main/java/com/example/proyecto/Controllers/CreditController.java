@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/credit")
@@ -36,5 +37,16 @@ public class CreditController {
     public ResponseEntity<Double> simulateCredit(@RequestBody CreditEntity credit) {
         double monthlyPayment = creditService.creditSimulate(credit);
         return ResponseEntity.ok(monthlyPayment);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCreditById(@PathVariable Long id){
+        Optional<CreditEntity> credit = creditService.findCreditByID(id);
+        if(credit.isPresent()){
+            creditService.deleteCreditById(id);
+            return ResponseEntity.ok("Credit deleted successfully");
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

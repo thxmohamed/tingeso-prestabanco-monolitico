@@ -205,29 +205,6 @@ label {
   display: block;
 }
 
-.input-field {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-.input-file {
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #fff;
-  font-size: 14px;
-}
-
 .submit-btn {
   padding: 12px;
   background-color: #007bff;
@@ -250,4 +227,40 @@ label {
   font-weight: bold;
 }
 
+.application-history-container {
+  padding: 20px;
+}
 
+.applications-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.applications-list li {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #61dafbaa;
+  border: 1px solid #000000;
+  cursor: pointer;
+}
+
+.applications-list li.selected {
+  background-color: #8de78d;
+  border-color: #000000;     
+}
+
+.applications-list li.selected:hover {
+  background-color: #98cd80;
+}
+
+.applications-list li:hover {
+  background-color: #24a9b8aa;
+}
+
+.application-details {
+  margin-top: 20px;
+}
+
+.clickable {
+  cursor: pointer;
+}

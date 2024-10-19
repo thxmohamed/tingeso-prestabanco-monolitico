@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class CreditService {
@@ -30,5 +31,13 @@ public class CreditService {
         float amount = credit.getRequestedAmount();
         return (amount*interest*Math.pow((1 + interest), months))/
                 (Math.pow(1 + interest, months) - 1);
+    }
+
+    public Optional<CreditEntity> findCreditByID(Long id){
+        return creditRepository.findById(id);
+    }
+
+    public void deleteCreditById(Long id){
+        creditRepository.deleteById(id);
     }
 }

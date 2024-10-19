@@ -7,7 +7,8 @@ import './App.css'
 import MyProfile from './components/MyProfile';
 import CreditSimulate from './components/CreditSimulate'
 import CreditApplication from './components/CreditApplication';
-//import CreditApplication from './components/CreditApplication'
+import FileUpload from './components/FileUpload';
+import ApplicationHistory from './components/ApplicationHistory';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +32,8 @@ function App() {
           <Route path="/profile" element={<MyProfile />} />
           <Route path="/simulate" element={<CreditSimulate />} />
           <Route path="/application" element={<CreditApplication />} />
+          <Route path="/profile/history" element={< ApplicationHistory/>} />
+          <Route path="/application/upload/:creditID" element={<FileUpload />} />
           <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} />} />
         </Routes>
       </div>

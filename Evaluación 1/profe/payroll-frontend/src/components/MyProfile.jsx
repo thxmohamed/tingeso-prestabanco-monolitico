@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "../App.css";
 
 const MyProfile = () => {
@@ -27,6 +27,9 @@ const MyProfile = () => {
     <div className="profile-container">
       <h1 className="profile-title">Mi Perfil</h1>
       <div className="profile-card">
+        <Link to="/profile/history" className="btn">
+          Mis Solicitudes
+        </Link>
         <div className="profile-item">
           <strong>Nombre:</strong> {user.name}
         </div>
@@ -44,6 +47,7 @@ const MyProfile = () => {
         Atrás
       </button>
     </div>
+    
   );
 };
 
