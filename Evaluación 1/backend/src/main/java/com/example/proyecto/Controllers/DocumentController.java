@@ -3,8 +3,7 @@ package com.example.proyecto.Controllers;
 import com.example.proyecto.Entities.DocumentEntity;
 import com.example.proyecto.Services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +21,7 @@ public class DocumentController {
         List<DocumentEntity> documents = documentService.getCreditDocuments(id);
         return ResponseEntity.ok(documents);
     }
+
 
     @GetMapping("/")
     public ResponseEntity<List<DocumentEntity>> listDocuments(){
@@ -48,6 +48,27 @@ public class DocumentController {
 
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed");
+        }
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<byte[]> downloadByID(@PathVariable Long id){
+        DocumentEntity document = documentService.getDocumentById(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDisposition(ContentDisposition.attachment().filename(document.getFilename()).build()); // Establece la descarga del archivo
+
+        return new ResponseEntity<>(document.getFileData(), headers, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteByCreditID(@PathVariable Long id) {
+        try {
+            documentService.deleteByCreditID(id);
+            return ResponseEntity.ok("Documents deleted successfully");
+        } catch (Exception e) {
+            System.err.println("Error deleting documents: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting documents");
         }
     }
 

@@ -16,4 +16,13 @@ const simulate = (data) => {
     return httpClient.post("/credit/simulate", data);
 };
 
-export default {getAll, save, getByClientID, simulate}
+const updateStatus = (id, newStatus) => {
+    return httpClient.put(`/credit/${id}/status`, newStatus);
+};
+
+
+const deleteById = id => {
+    return httpClient.delete(`/credit/${id}`)
+}
+
+export default {getAll, save, getByClientID, simulate, deleteById, updateStatus}

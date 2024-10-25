@@ -41,5 +41,7 @@ public class CreditEntity {
         E8_CANCELADA_POR_CLIENTE,
         E9_EN_DESEMBOLSO
     };
+
+    private int propertyValue;
     private float monthlyFee;
 }

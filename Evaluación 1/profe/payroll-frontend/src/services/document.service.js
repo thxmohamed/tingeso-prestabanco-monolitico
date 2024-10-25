@@ -12,8 +12,17 @@ const save = (data) => {
     });
 }
 
-const getByCreditID = id => {
-    return httpClient.get(`/file/${id}`)
-}
+const getByCreditID = (id) => {
+    return httpClient.get(`/file/${id}`, {
+      responseType: 'json', 
+    });
+  };
 
-export default {getAll, save, getByCreditID}
+  const downloadFileByID = (id) => {
+    return httpClient.get(`/file/download/${id}`, {
+      responseType: 'arraybuffer', // Obtener los datos binarios del archivo
+    });
+  };
+  
+
+export default {getAll, save, getByCreditID, downloadFileByID}

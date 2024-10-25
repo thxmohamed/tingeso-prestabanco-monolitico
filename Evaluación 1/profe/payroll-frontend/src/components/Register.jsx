@@ -73,7 +73,7 @@ function Register() {
       password: form.password,
       rut: form.rut,
       age: form.edad,
-      salary: form.salario,
+      income: form.salario,
       rol: 'CUSTOMER'
     };
 
@@ -207,7 +207,6 @@ function Register() {
   );
 }
 
-// Estilos en línea
 const styles = {
   registerContainer: {
     display: 'flex',

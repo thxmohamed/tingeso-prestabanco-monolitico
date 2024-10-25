@@ -23,22 +23,26 @@ const CreditApplication = () => {
     "Primera Vivienda": {
       loanType: "PRIMERA_VIVIENDA",
       interestRate: 5.0,
-      maxYears: 30
+      maxYears: 30,
+      maxFinancingPercentage: 0.8
     },
     "Segunda Vivienda": {
       loanType: "SEGUNDA_VIVIENDA",
       interestRate: 6.0,
-      maxYears: 20
+      maxYears: 20,
+      maxFinancingPercentage: 0.7
     },
     "Propiedades Comerciales": {
       loanType: "PROPIEDADES_COMERCIALES",
       interestRate: 7.0,
-      maxYears: 25
+      maxYears: 25,
+      maxFinancingPercentage: 0.6
     },
     "Remodelación": {
       loanType: "REMODELACION",
       interestRate: 6.0,
-      maxYears: 15
+      maxYears: 15,
+      maxFinancingPercentage: 0.5
     }
   };
 
@@ -49,8 +53,12 @@ const CreditApplication = () => {
 
   const validateForm = () => {
     const selectedLoanType = loanTypesMap[form.loanType];
+    const maxFinancingAmount = selectedLoanType.maxFinancingPercentage * form.propertyValue;
     if (form.yearsLimit > selectedLoanType.maxYears) {
       return `El plazo máximo para ${form.loanType} es de ${selectedLoanType.maxYears} años.`;
+    }
+    if (parseFloat(form.requestedAmount) > maxFinancingAmount) {
+      return `El monto máximo financiable para ${form.loanType} es $${maxFinancingAmount.toFixed(2)}, que es el ${selectedLoanType.maxFinancingPercentage * 100}% del valor de la propiedad.`;
     }
     if (!form.requestedAmount || !form.yearsLimit) {
       return 'Todos los campos son obligatorios.';
@@ -173,7 +181,7 @@ const CreditApplication = () => {
             {loading ? 'Procesando...' : 'Adjuntar Archivos'}
           </button>
 
-          <button className="logout-button" onClick={() => navigate('/home')}>
+          <button className="go-back-button" onClick={() => navigate('/home')}>
             Atrás
           </button>
 

@@ -4,7 +4,7 @@ import creditService from '../services/credit.service';
 import '../App.css';
 
 // Componente para mostrar los detalles de una solicitud seleccionada
-const ApplicationDetails = ({ credit }) => {
+const ApplicationDetails = ({ credit, onCancel }) => {
   if (!credit) return <p>Selecciona una solicitud para ver los detalles</p>;
 
   return (
@@ -13,6 +13,9 @@ const ApplicationDetails = ({ credit }) => {
       <p><strong>Plazo (años):</strong> {credit.yearsLimit}</p>
       <p><strong>Tasa de Interés:</strong> {credit.interestRate}%</p>
       <p><strong>Cuota Mensual:</strong> ${credit.monthlyFee}</p>
+      <button onClick={() => onCancel(credit.id)} className="logout-button">
+        Cancelar Solicitud
+      </button>
     </div>
   );
 };
@@ -21,15 +24,13 @@ const ApplicationHistory = () => {
   const [applications, setApplications] = useState([]);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [error, setError] = useState('');
-  const [currentPage, setCurrentPage] = useState(1); // Estado para la página actual
-  const applicationsPerPage = 1; // Cantidad de solicitudes por página
+  const [currentPage, setCurrentPage] = useState(1);
+  const applicationsPerPage = 1;
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Obtener el ID del usuario loggeado desde localStorage
     const clientID = JSON.parse(localStorage.getItem('user')).id;
 
-    // Llamar al servicio para obtener las solicitudes por ID de cliente
     creditService.getByClientID(clientID)
       .then(response => {
         setApplications(response.data);
@@ -48,13 +49,32 @@ const ApplicationHistory = () => {
     setSelectedApplication(application);
   };
 
+  const handleCancel = (id) => {
+    const newStatus = 'E8_CANCELADA_POR_CLIENTE';
+    console.log("Cancelando solicitud con ID:", id, "con datos:", newStatus);
+    
+    creditService.updateStatus(id, newStatus)
+      .then(() => {
+        // Actualizar la lista de solicitudes
+        setApplications(applications.map(app => 
+          app.id === id ? { ...app, status: 'E8_CANCELADA_POR_CLIENTE' } : app
+        ));
+        setSelectedApplication(null);
+      })
+      .catch(error => {
+        console.error("Error al cancelar la solicitud:", error);
+        setError("Hubo un error al cancelar la solicitud.");
+      });
+  };
+  
+  
+
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
     }
   };
 
-  // Función para ir a la página siguiente
   const nextPage = () => {
     if (currentPage < Math.ceil(applications.length / applicationsPerPage)) {
       setCurrentPage(currentPage + 1);
@@ -67,7 +87,7 @@ const ApplicationHistory = () => {
 
   return (
     <div className="application-history-container">
-      <button className="btn-back" onClick={goBack}>
+      <button className="go-back-button" onClick={goBack}>
         Atrás
       </button>
 
@@ -94,7 +114,6 @@ const ApplicationHistory = () => {
               ))}
             </ul>
 
-            {/* Controles de paginación */}
             <div className="pagination-controls">
               <button onClick={prevPage} disabled={currentPage === 1}>Anterior</button>
               <span>Página {currentPage} de {Math.ceil(applications.length / applicationsPerPage)}</span>
@@ -104,7 +123,7 @@ const ApplicationHistory = () => {
         )}
       </div>
 
-      <ApplicationDetails credit={selectedApplication} />
+      <ApplicationDetails credit={selectedApplication} onCancel={handleCancel} />
     </div>
   );
 };

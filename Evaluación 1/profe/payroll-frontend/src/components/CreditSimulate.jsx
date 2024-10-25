@@ -79,8 +79,8 @@ const CreditSimulate = () => {
           />
         </div>
 
-        <button type="submit">Simular Crédito</button>
-        <button className="btn-back" onClick={handleBack}>
+        <button className='button'>Simular Crédito</button>
+        <button className='button' onClick={handleBack}>
             Atrás
         </button>
       </form>

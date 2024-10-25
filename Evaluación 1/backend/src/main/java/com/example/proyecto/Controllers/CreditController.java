@@ -2,7 +2,9 @@ package com.example.proyecto.Controllers;
 
 import com.example.proyecto.Entities.CreditEntity;
 import com.example.proyecto.Entities.DocumentEntity;
+import com.example.proyecto.Services.CheckRulesService;
 import com.example.proyecto.Services.CreditService;
+import com.example.proyecto.Services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,8 @@ import java.util.Optional;
 public class CreditController {
     @Autowired
     CreditService creditService;
-
+    @Autowired
+    DocumentService documentService;
     @GetMapping("/")
     public ResponseEntity<List<CreditEntity>> listCredits(){
         List<CreditEntity> credits = creditService.getCredits();
@@ -44,9 +47,18 @@ public class CreditController {
         Optional<CreditEntity> credit = creditService.findCreditByID(id);
         if(credit.isPresent()){
             creditService.deleteCreditById(id);
+            if(documentService.creditHasDocuments(id)){
+                documentService.deleteByCreditID(id);
+            }
             return ResponseEntity.ok("Credit deleted successfully");
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Void> updateCreditStatus(@PathVariable Long id, @RequestBody CreditEntity.Status status) {
+        creditService.updateCreditStatus(id, status);
+        return ResponseEntity.ok().build();
     }
 }

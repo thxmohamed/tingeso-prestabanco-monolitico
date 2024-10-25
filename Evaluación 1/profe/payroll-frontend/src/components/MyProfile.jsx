@@ -43,7 +43,7 @@ const MyProfile = () => {
           <strong>Rol:</strong> {user.rol}
         </div>
       </div>
-      <button className="btn-back" onClick={handleBack}>
+      <button className="go-back-button" onClick={handleBack}>
         Atrás
       </button>
     </div>

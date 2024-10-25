@@ -28,6 +28,7 @@ public class UserEntity {
     private String password;
     @Column(unique = true)
     private String rut;
+    private float income;
     private int age;
 
 }

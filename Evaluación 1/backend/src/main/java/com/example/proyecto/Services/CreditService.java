@@ -1,14 +1,19 @@
 package com.example.proyecto.Services;
 
+import com.example.proyecto.Entities.DocumentEntity;
 import com.example.proyecto.Repositories.CreditRepository;
 import com.example.proyecto.Entities.CreditEntity;
+import com.example.proyecto.Repositories.DocumentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CreditService {
     @Autowired
     CreditRepository creditRepository;
@@ -40,4 +45,13 @@ public class CreditService {
     public void deleteCreditById(Long id){
         creditRepository.deleteById(id);
     }
+
+    public void updateCreditStatus(Long id, CreditEntity.Status status) {
+        creditRepository.updateCreditStatus(id, status);
+    }
+
+
+
+
+
 }

@@ -11,4 +11,6 @@ public interface DocumentRepository extends JpaRepository<DocumentEntity, Long> 
     public List<DocumentEntity> findByCreditID(Long id);
 
     public DocumentEntity findByFileData(byte[] filedata);
+
+    public void deleteAllByCreditID(Long id);
 }
