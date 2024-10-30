@@ -4,7 +4,7 @@ import creditService from '../services/credit.service';
 import '../App.css';
 
 // Componente para mostrar los detalles de una solicitud seleccionada
-const ApplicationDetails = ({ credit, onCancel }) => {
+const ApplicationDetails = ({ credit, onCancel, onAccept }) => {
   if (!credit) return <p>Selecciona una solicitud para ver los detalles</p>;
 
   return (
@@ -12,10 +12,21 @@ const ApplicationDetails = ({ credit, onCancel }) => {
       <h3>Detalles de la Solicitud</h3>
       <p><strong>Plazo (años):</strong> {credit.yearsLimit}</p>
       <p><strong>Tasa de Interés:</strong> {credit.interestRate}%</p>
-      <p><strong>Cuota Mensual:</strong> ${credit.monthlyFee}</p>
+      <p><strong>Cuota Mensual:</strong> ${credit.monthlyFee.toFixed(2)}</p>
+      <p><strong>Costo Total:</strong> ${(credit.administrationCommission + (credit.monthlyFee * credit.yearsLimit * 12)).toFixed(2)}</p>
+      <p><strong>Observaciones:</strong> {credit.observations}</p>
+      
+      {/* Botón de Cancelar */}
       <button onClick={() => onCancel(credit.id)} className="logout-button">
         Cancelar Solicitud
       </button>
+      
+      {/* Botón de Aceptar si el estado es E4_PRE_APROBADA */}
+      {credit.status === 'E4_PRE_APROBADA' && (
+        <button onClick={() => onAccept(credit.id)} className="btn-green">
+          Aceptar
+        </button>
+      )}
     </div>
   );
 };
@@ -40,6 +51,23 @@ const ApplicationHistory = () => {
         setError("Hubo un error al cargar las solicitudes.");
       });
   }, []);
+
+
+  const handleAccept = (id) => {
+    const newStatus = 'E5_EN_APROBACION_FINAL';
+    creditService.updateStatus(id, newStatus)
+      .then(() => {
+        // Actualiza el estado local de las solicitudes
+        setApplications(applications.map(app => 
+          app.id === id ? { ...app, status: 'E5_EN_APROBACION_FINAL' } : app
+        ));
+        setSelectedApplication(prev => ({ ...prev, status: newStatus }));
+      })
+      .catch(error => {
+        console.error("Error al aceptar la solicitud:", error);
+        setError("Hubo un error al actualizar la solicitud.");
+      });
+  };
 
   const indexOfLastApplication = currentPage * applicationsPerPage;
   const indexOfFirstApplication = indexOfLastApplication - applicationsPerPage;
@@ -123,7 +151,11 @@ const ApplicationHistory = () => {
         )}
       </div>
 
-      <ApplicationDetails credit={selectedApplication} onCancel={handleCancel} />
+      <ApplicationDetails
+        credit={selectedApplication}
+        onCancel={handleCancel}
+        onAccept={handleAccept}  // Nuevo prop para aceptar
+      />
     </div>
   );
 };

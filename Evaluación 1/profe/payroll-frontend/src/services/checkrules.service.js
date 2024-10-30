@@ -12,58 +12,35 @@ const getById = id => {
     return httpClient.get(`/checkrules/${id}`);
 };
 
-const checkRelationQuotaIncome = (credit, income) => {
-    return httpClient.post(`/checkrules/check1/${income}`, credit);
+const getByCreditID = creditID => {
+    return httpClient.get(`/checkrules/credit/${creditID}`)
+}
+
+const creditEvaluation = async (checkId, evaluationData) => {
+    try {
+        await httpClient.post(`/checkrules/check1/${checkId}`);
+        await httpClient.post(`/checkrules/check2/${checkId}/${evaluationData.creditHistoryCheck}`);
+        await httpClient.post(`/checkrules/check3/${checkId}/${evaluationData.employmentStabilityCheck}`);
+        await httpClient.post(`/checkrules/check4/${checkId}/${evaluationData.currentDebt}`);
+        await httpClient.post(`/checkrules/check6/${checkId}`);
+        await httpClient.post(`/checkrules/check71/${checkId}/${evaluationData.minimumBalanceCheck}`);
+        await httpClient.post(`/checkrules/check72/${checkId}/${evaluationData.savingHistoryCheck}`);
+        await httpClient.post(`/checkrules/check73/${checkId}/${evaluationData.periodicDepositsCheck}`);
+        await httpClient.post(`/checkrules/check74/${checkId}/${evaluationData.balanceYearsAgoCheck}`);
+        await httpClient.post(`/checkrules/check75/${checkId}/${evaluationData.recentWithdrawalsCheck}`);
+
+        return { success: true };
+    } catch (error) {
+        console.error("Error en la evaluación de crédito:", error);
+        return { success: false, error: error.response.data };
+    }
 };
 
-const checkCreditHistory = (checkId, request) => {
-    return httpClient.post(`/checkrules/check2/${checkId}/${request}`);
-};
-
-const checkEmploymentStability = (checkId, request) => {
-    return httpClient.post(`/checkrules/check3/${checkId}/${request}`);
-};
-
-const checkDebtIncome = (checkId, currentDebt) => {
-    return httpClient.post(`/checkrules/check4/${checkId}/${currentDebt}`);
-};
-
-const checkApplicantAge = checkId => {
-    return httpClient.post(`/checkrules/check6/${checkId}`);
-};
-
-const checkMinimumBalance = (checkId, check) => {
-    return httpClient.post(`/checkrules/check71/${checkId}/${check}`);
-};
-
-const checkSavingHistory = (checkId, check) => {
-    return httpClient.post(`/checkrules/check72/${checkId}/${check}`);
-};
-
-const checkPeriodicDeposits = (checkId, check) => {
-    return httpClient.post(`/checkrules/check73/${checkId}/${check}`);
-};
-
-const checkBalanceYearsAgo = (checkId, check) => {
-    return httpClient.post(`/checkrules/check74/${checkId}/${check}`);
-};
-
-const checkRecentWithdrawals = (checkId, check) => {
-    return httpClient.post(`/checkrules/check75/${checkId}/${check}`);
-};
 
 export default {
     createEvaluation,
     getAll,
     getById,
-    checkRelationQuotaIncome,
-    checkCreditHistory,
-    checkEmploymentStability,
-    checkDebtIncome,
-    checkApplicantAge,
-    checkMinimumBalance,
-    checkSavingHistory,
-    checkPeriodicDeposits,
-    checkBalanceYearsAgo,
-    checkRecentWithdrawals
+    creditEvaluation,
+    getByCreditID
 };

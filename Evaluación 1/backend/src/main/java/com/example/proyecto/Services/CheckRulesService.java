@@ -51,12 +51,11 @@ public class CheckRulesService {
         }
     }
     @Transactional
-    public void checkRelationQuotaIncome(Long id, double income) {
-        Optional<CheckRulesEntity> checkRulesOpt = checkRulesRepository.findByCreditID(id);
+    public void checkRelationQuotaIncome(Long checkid, double income) {
+        Optional<CheckRulesEntity> checkRulesOpt = checkRulesRepository.findById(checkid);
 
         if (checkRulesOpt.isPresent()) {
             CheckRulesEntity checkRules = checkRulesOpt.get();
-            Long checkId = checkRules.getId();
 
             Optional<CreditEntity> creditOpt = creditRepository.findById(checkRules.getCreditID());
 
@@ -67,34 +66,34 @@ public class CheckRulesService {
                 boolean result = (credit.getMonthlyFee() / income) * 100 <= 35;
 
                 // Actualizar la regla 1 con el resultado de la validación
-                checkRulesRepository.updateRule1(checkId, result);
+                checkRulesRepository.updateRule1(checkid, result);
             } else {
                 throw new EntityNotFoundException("CreditEntity no encontrado con ID: " + checkRules.getCreditID());
             }
         } else {
-            throw new EntityNotFoundException("CheckRulesEntity no encontrado con ID: " + id);
+            throw new EntityNotFoundException("CheckRulesEntity no encontrado con ID: " + checkid);
         }
     }
 
     @Transactional
-    public void checkCreditHistory(Long id, boolean check){
-        checkRulesRepository.updateRule2(id, check);
+    public void checkCreditHistory(Long checkid, boolean check){
+        checkRulesRepository.updateRule2(checkid, check);
     }
 
     @Transactional
-    public void checkEmploymentStability(Long id, boolean check){
-        checkRulesRepository.updateRule3(id, check);
+    public void checkEmploymentStability(Long checkid, boolean check){
+        checkRulesRepository.updateRule3(checkid, check);
     }
     @Transactional
-    public void checkDebtIncome(Long id, double currentDebt){
-        Optional<CheckRulesEntity> checkRulesOpt = checkRulesRepository.findById(id);
+    public void checkDebtIncome(Long checkid, double currentDebt){
+        Optional<CheckRulesEntity> checkRulesOpt = checkRulesRepository.findById(checkid);
         if(checkRulesOpt.isPresent()){
             CheckRulesEntity checkRules = checkRulesOpt.get();
             CreditEntity credit = creditRepository.getById(checkRules.getCreditID());
             UserEntity user = userRepository.getById(checkRules.getClientID());
             double totalDebt = credit.getMonthlyFee() + currentDebt;
             boolean check = totalDebt/user.getIncome() <= 0.5;
-            checkRulesRepository.updateRule4(id, check);
+            checkRulesRepository.updateRule4(checkid, check);
         }
 
     }
@@ -141,5 +140,43 @@ public class CheckRulesService {
     public void checkRecentWithdrawals(Long checkid, boolean check){
         checkRulesRepository.updateRule75(checkid, check);
     }
+
+    @Transactional
+    public void creditEvaluation(Long checkid, double income, double currentDebt, boolean creditHistoryCheck,
+                                 boolean employmentStabilityCheck, boolean minimumBalanceCheck,
+                                 boolean savingHistoryCheck, boolean periodicDepositsCheck,
+                                 boolean balanceYearsAgoCheck, boolean recentWithdrawalsCheck) {
+
+        // 1. Evaluación de la relación cuota/ingreso
+        checkRelationQuotaIncome(checkid, income);
+
+        // 2. Evaluación del historial crediticio
+        checkCreditHistory(checkid, creditHistoryCheck);
+
+        // 3. Evaluación de la estabilidad laboral
+        checkEmploymentStability(checkid, employmentStabilityCheck);
+
+        // 4. Evaluación de la relación deuda/ingreso
+        checkDebtIncome(checkid, currentDebt);
+
+        // 5. Evaluación de la edad del solicitante
+        checkApplicantAge(checkid);
+
+        // 6. Evaluación del saldo mínimo
+        checkMinimumBalance(checkid, minimumBalanceCheck);
+
+        // 7. Evaluación del historial de ahorros
+        checkSavingHistory(checkid, savingHistoryCheck);
+
+        // 8. Evaluación de los depósitos periódicos
+        checkPeriodicDeposits(checkid, periodicDepositsCheck);
+
+        // 9. Evaluación del saldo de hace años
+        checkBalanceYearsAgo(checkid, balanceYearsAgoCheck);
+
+        // 10. Evaluación de retiros recientes
+        checkRecentWithdrawals(checkid, recentWithdrawalsCheck);
+    }
+
 
 }

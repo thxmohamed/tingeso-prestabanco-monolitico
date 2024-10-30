@@ -3,6 +3,8 @@ package com.example.proyecto.Controllers;
 import com.example.proyecto.Entities.CheckRulesEntity;
 import com.example.proyecto.Entities.CreditEntity;
 import com.example.proyecto.Services.CheckRulesService;
+import com.example.proyecto.Services.UserService;
+import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,8 @@ import java.util.List;
 public class CheckRulesController {
     @Autowired
     CheckRulesService checkRulesService;
+    @Autowired
+    UserService userService;
 
     @PostMapping("/")
     public ResponseEntity<?> createEvaluation(@RequestBody CheckRulesEntity checkRules){
@@ -38,11 +42,11 @@ public class CheckRulesController {
         CheckRulesEntity check = checkRulesService.getById(id);
         return ResponseEntity.ok(check);
     }
-    @PostMapping("/check1/{income}")
-    public ResponseEntity<CheckRulesEntity> checkRelationQuotaIncome(@RequestBody CreditEntity credit, @PathVariable double income) {
-        Long id = credit.getId();
-        checkRulesService.checkRelationQuotaIncome(id, income);
-        CheckRulesEntity result = checkRulesService.getById(checkRulesService.getByCreditID(id).getId());
+    @PostMapping("/check1/{checkid}")
+    public ResponseEntity<CheckRulesEntity> checkRelationQuotaIncome(@PathVariable Long checkid) {
+        double income = userService.getUserById(checkRulesService.getById(checkid).getClientID()).getIncome();
+        checkRulesService.checkRelationQuotaIncome(checkid, income);
+        CheckRulesEntity result = checkRulesService.getById(checkid);
         return ResponseEntity.ok(result);
     }
 
@@ -149,4 +153,9 @@ public class CheckRulesController {
         }
     }
 
+    @GetMapping("credit/{id}")
+    public ResponseEntity<CheckRulesEntity> getByCreditID(@PathVariable Long id){
+        CheckRulesEntity result = checkRulesService.getByCreditID(id);
+        return ResponseEntity.ok(result);
+    }
 }

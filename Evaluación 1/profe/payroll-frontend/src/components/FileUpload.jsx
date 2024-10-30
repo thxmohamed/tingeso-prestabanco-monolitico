@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
-import documentService from '../services/document.service'; // Asegúrate de tener este servicio configurado para enviar archivos al backend
+import { useNavigate } from 'react-router-dom'; 
+import checkrulesService from '../services/checkrules.service';
+import documentService from '../services/document.service'; 
 
 const FileUpload = ({ creditID, loanType }) => {
   const [files, setFiles] = useState({
@@ -68,6 +69,26 @@ const FileUpload = ({ creditID, loanType }) => {
         // Llamar al servicio para guardar el archivo
         await documentService.save(formData);
       }
+
+      const clientID = JSON.parse(localStorage.getItem('user')).id;
+
+      // creacion de la evaluacion
+      const checkRulesData = {
+        clientID: clientID,
+        creditID: creditID,
+        rule1: false,
+        rule2: false,
+        rule3: false,
+        rule4: false,
+        rule6: false,
+        rule71: false,
+        rule72: false,
+        rule73: false,
+        rule74: false,
+        rule75: false
+      };
+      
+      await checkrulesService.createEvaluation(checkRulesData);
       
       alert('Todos los archivos se subieron correctamente.');
       

@@ -38,8 +38,9 @@ public class CreditService {
                 (Math.pow(1 + interest, months) - 1);
     }
 
-    public Optional<CreditEntity> findCreditByID(Long id){
-        return creditRepository.findById(id);
+    public CreditEntity findCreditByID(Long id){
+        Optional<CreditEntity> credit = creditRepository.findById(id);
+        return credit.orElse(null);
     }
 
     public void deleteCreditById(Long id){
@@ -50,8 +51,9 @@ public class CreditService {
         creditRepository.updateCreditStatus(id, status);
     }
 
-
-
-
+    @Transactional
+    public void updateObservations(Long id, String observations) {
+        creditRepository.updateObservations(id, observations);
+    }
 
 }

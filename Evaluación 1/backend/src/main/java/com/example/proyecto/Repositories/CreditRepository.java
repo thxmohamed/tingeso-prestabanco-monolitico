@@ -16,4 +16,8 @@ public interface CreditRepository extends JpaRepository<CreditEntity, Long>{
     @Transactional
     @Query("UPDATE CreditEntity c SET c.status = ?2 WHERE c.id = ?1")
     void updateCreditStatus(Long id, CreditEntity.Status status);
+    @Modifying
+    @Transactional
+    @Query("UPDATE CreditEntity c SET c.observations = :observations WHERE c.id = :id")
+    int updateObservations(Long id, String observations);
 }

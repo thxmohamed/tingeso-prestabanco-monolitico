@@ -44,4 +44,6 @@ public class CreditEntity {
 
     private int propertyValue;
     private float monthlyFee;
+    private float administrationCommission;
+    private String observations;
 }

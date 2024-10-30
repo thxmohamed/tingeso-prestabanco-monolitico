@@ -13,6 +13,7 @@ const CreditApplication = () => {
   });
 
   const [monthlyFee, setMonthlyFee] = useState(null);
+  const [administrationCommission, setAdministrationCommission] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);  // Estado para controlar si se ha enviado el formulario
@@ -92,13 +93,16 @@ const CreditApplication = () => {
     try {
       // Simulamos el crédito para obtener la cuota mensual
       const simulateResponse = await creditService.simulate(creditEntity);
-      const monthlyFee = simulateResponse.data;
+      const monthlyFee = simulateResponse.data + 0.0003*simulateResponse.data + 20;
+      const administrationCommission = creditEntity.requestedAmount*0.01;
       setMonthlyFee(monthlyFee);
+      setAdministrationCommission(administrationCommission);
 
       // Guardamos el crédito en la base de datos
       const creditData = {
         ...creditEntity,
-        monthlyFee: monthlyFee
+        monthlyFee: monthlyFee,
+        administrationCommission: administrationCommission
       };
       const saveResponse = await creditService.save(creditData);
       const creditID = saveResponse.data.id;
@@ -106,7 +110,6 @@ const CreditApplication = () => {
       setIsSubmitted(true); 
 
       alert("Crédito guardado exitosamente.");
-      console.log("Este es el credito real: ", creditID);
     } catch (error) {
       console.error("Error en la simulación o guardado del crédito:", error);
       setError('Ocurrió un error al procesar la solicitud.');

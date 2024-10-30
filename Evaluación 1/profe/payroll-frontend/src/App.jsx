@@ -37,7 +37,7 @@ function App() {
           <Route path="/profile/history" element={< ApplicationHistory/>} />
           <Route path="/application/upload/:creditID" element={<FileUpload />} />
           <Route path = "/evaluation" element={<CreditEvaluation />} />
-          <Route path="/evaluation/:id" element={<CreditEvaluationP2 />} />
+          <Route path="/evaluation/:creditID" element={<CreditEvaluationP2 />} />
           <Route path="*" element={<Navigate to={isLoggedIn ? "/home" : "/login"} />} />
         </Routes>
       </div>

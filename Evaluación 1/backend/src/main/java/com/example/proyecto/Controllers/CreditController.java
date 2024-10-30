@@ -6,6 +6,7 @@ import com.example.proyecto.Services.CheckRulesService;
 import com.example.proyecto.Services.CreditService;
 import com.example.proyecto.Services.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,12 @@ public class CreditController {
         List<CreditEntity> credits = creditService.getClientCredits(id);
         return ResponseEntity.ok(credits);
     }
+
+    @GetMapping("/find/{id}")
+    public ResponseEntity<CreditEntity> getByID(@PathVariable Long id){
+        CreditEntity credit = creditService.findCreditByID(id);
+        return ResponseEntity.ok(credit);
+    }
     @PostMapping("/simulate")
     public ResponseEntity<Double> simulateCredit(@RequestBody CreditEntity credit) {
         double monthlyPayment = creditService.creditSimulate(credit);
@@ -44,8 +51,8 @@ public class CreditController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCreditById(@PathVariable Long id){
-        Optional<CreditEntity> credit = creditService.findCreditByID(id);
-        if(credit.isPresent()){
+        CreditEntity credit = creditService.findCreditByID(id);
+        if(!(credit.equals(null))){
             creditService.deleteCreditById(id);
             if(documentService.creditHasDocuments(id)){
                 documentService.deleteByCreditID(id);
@@ -60,5 +67,15 @@ public class CreditController {
     public ResponseEntity<Void> updateCreditStatus(@PathVariable Long id, @RequestBody CreditEntity.Status status) {
         creditService.updateCreditStatus(id, status);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}/observations")
+    public ResponseEntity<String> updateObservations(@PathVariable Long id, @RequestBody String observations) {
+        try {
+            creditService.updateObservations(id, observations);
+            return ResponseEntity.ok("Observations updated successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update observations.");
+        }
     }
 }

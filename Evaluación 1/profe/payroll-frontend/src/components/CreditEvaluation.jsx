@@ -10,10 +10,6 @@ const ApplicationDetails = ({ credit, statusOptions, onStatusChange }) => {
   const [documents, setDocuments] = useState([]);  // Estado para los documentos asociados
   const navigate = useNavigate();
 
-  const goBack = () => {
-      navigate('/home');
-  }
-
   useEffect(() => {
     if (credit) {
       // Recuperar documentos asociados al creditID
@@ -75,7 +71,6 @@ const ApplicationDetails = ({ credit, statusOptions, onStatusChange }) => {
       </div>
 
       <div className="documents-section">
-        <button onClick={goBack} className="go-back-button">Volver</button>
         <h4>Documentos Asociados</h4>
         {documents.length > 0 ? (
           <ul>
@@ -95,7 +90,6 @@ const ApplicationDetails = ({ credit, statusOptions, onStatusChange }) => {
   );
 };
 
-
 const CreditEvaluation = () => {
   const [applications, setApplications] = useState([]);
   const [filteredApplications, setFilteredApplications] = useState([]);
@@ -103,20 +97,21 @@ const CreditEvaluation = () => {
   const [error, setError] = useState('');
   const [selectedStatus, setSelectedStatus] = useState(''); // Estado seleccionado para el filtro
   const navigate = useNavigate();
+  const goBack = () => {
+    navigate('/home');
+}
 
   const statusOptions = [
     { label: 'En revisión inicial', value: 'E1_EN_REVISION_INICIAL' },
     { label: 'Pendiente documentación', value: 'E2_PENDIENTE_DOCUMENTACION' },
-    { label: 'En evaluación', value: 'E3_EN_EVALUACION' }
-    /*
-    ,
+    { label: 'En evaluación', value: 'E3_EN_EVALUACION' },
     { label: 'Pre-aprobada', value: 'E4_PRE_APROBADA' },
     { label: 'En aprobación final', value: 'E5_EN_APROBACION_FINAL' },
     { label: 'Aprobada', value: 'E6_APROBADA' },
     { label: 'Rechazada', value: 'E7_RECHAZADA' },
     { label: 'Cancelada por cliente', value: 'E8_CANCELADA_POR_CLIENTE' },
     { label: 'En desembolso', value: 'E9_EN_DESEMBOLSO' }
-     */
+
   ];
 
   useEffect(() => {
@@ -177,6 +172,7 @@ const CreditEvaluation = () => {
   return (
     <div className="application-evaluation-container">
       <h1>Evaluación de Solicitudes</h1>
+      
 
       {error && <p className="error">{error}</p>}
 
@@ -189,6 +185,7 @@ const CreditEvaluation = () => {
           ))}
         </select>
       </div>
+      <button onClick={goBack} className="go-back-button">Volver</button>
 
       <div className="applications-list">
         {filteredApplications.length === 0 ? (
