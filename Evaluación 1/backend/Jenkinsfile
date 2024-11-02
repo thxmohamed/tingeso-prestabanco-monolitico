@@ -1,0 +1,36 @@
+pipeline{
+    agent any
+    tools{
+        maven "maven"
+
+    }
+    stages{
+        stage("Build JAR File"){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/FabianLizama/autofix-tingeso']])
+                dir("api"){
+                    bat "mvn clean install"
+                }
+            }
+        }
+        stage("Test"){
+            steps{
+                dir("api"){
+                    bat "mvn test"
+                }
+            }
+        }
+        stage("Build and Push Docker Image"){
+            steps{
+                dir("api"){
+                    script{
+                         withDockerRegistry(credentialsId: 'docker-credentials'){
+                            bat "docker build -t fabianlizama/autofix-backend ."
+                            bat "docker push fabianlizama/autofix-backend"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

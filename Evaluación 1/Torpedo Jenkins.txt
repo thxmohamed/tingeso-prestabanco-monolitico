@@ -1,0 +1,4 @@
+(En la carpeta donde está jenkins.war)
+java -jar jenkins.war
+
+http://localhost:8080

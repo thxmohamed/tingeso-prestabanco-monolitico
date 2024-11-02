@@ -1,6 +1,0 @@
-Entidades
-1) Usuario
-
-2) Préstamo
-
-3) Solicitud

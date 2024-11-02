@@ -1,0 +1,63 @@
+BACKEND
+
+primero hacer clean en Maven y luego en run Maven build
+
+comando para construir Docker en el backend. Tiene que ser ejecutado en la carpeta donde está el Dockerfile
+docker build -t thxmohamed/backend-container . 
+
+luego, para subir a Dockerhub
+docker push thxmohamed/backend-container
+
+para bajarla
+docker pull thxmohamed/backend-container
+
+crear network
+docker network create test
+
+crear volumen
+docker volume create db-volume
+
+para correrlo estando en la casa
+docker run --name backend-container -p 8090:8090 -e DB_HOST=192.168.1.10 --network test -d thxmohamed/backend-container
+
+para correrlo estando en la U
+docker run --name backend-container -p 8090:8090 -e DB_HOST=192.168.83.158 --network test -d thxmohamed/backend-container
+
+para correr mysql
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=mohamed123 -e MYSQL_DATABASE=prueba -p 3306:3306 -d mysql:8.0
+
+Frontend
+
+construir el build (en la carpeta del frontend)
+
+npm run build
+
+construir el Docker
+
+docker build -t thxmohamed/frontend-container:latest .
+
+para correrlo
+
+docker run --name frontend-container -d -p 8070:80 thxmohamed/frontend-container:latest
+
+para subirlo a dockerhub 
+
+docker login
+docker  push thxmohamed/frontend-container:latest
+
+abrirlo en el navegador
+
+http://localhost:8070/
+
+DOCKER COMPOSE
+
+ejecutarlo
+
+docker compose up -d
+
+bajar todo
+
+docker compose down 
+
+en el navegador, el frontend está en
+http://localhost:8081/

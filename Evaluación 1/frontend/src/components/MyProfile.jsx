@@ -1,34 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import "../App.css"
+import { useNavigate, Link } from 'react-router-dom';
+import "../App.css";
 
 const MyProfile = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  // Obtener datos del usuario loggeado al cargar el componente
   useEffect(() => {
-    const storedUser = localStorage.getItem('user'); // Suponiendo que guardaste los datos en localStorage
+    const storedUser = localStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser)); // Parsear el string almacenado en un objeto
+      setUser(JSON.parse(storedUser));
     } else {
       console.log("No se encontró ningún usuario loggeado.");
     }
   }, []);
 
-  // Si el usuario no está loggeado, mostrar mensaje
+  const handleBack = () => {
+    navigate('/home'); // Redirige al Home
+  };
+
   if (!user) {
-    return <div>No estás loggeado.</div>;
+    return <div className="no-user-message">No estás loggeado.</div>;
   }
 
   return (
     <div className="profile-container">
-      <h1>Mi Perfil</h1>
-      <div className="profile-details">
-        <p><strong>Nombre:</strong> {user.name}</p>
-        <p><strong>Apellido:</strong> {user.lastName}</p>
-        <p><strong>Correo:</strong> {user.email}</p>
-        <p><strong>Rol:</strong> {user.rol}</p>
+      <h1 className="profile-title">Mi Perfil</h1>
+      <div className="profile-card">
+        <Link to="/profile/history" className="btn">
+          Mis Solicitudes
+        </Link>
+        <div className="profile-item">
+          <strong>Nombre:</strong> {user.name}
+        </div>
+        <div className="profile-item">
+          <strong>Apellido:</strong> {user.lastName}
+        </div>
+        <div className="profile-item">
+          <strong>Correo:</strong> {user.email}
+        </div>
+        <div className="profile-item">
+          <strong>Rol:</strong> {user.rol}
+        </div>
       </div>
+      <button className="go-back-button" onClick={handleBack}>
+        Atrás
+      </button>
     </div>
+    
   );
 };
 

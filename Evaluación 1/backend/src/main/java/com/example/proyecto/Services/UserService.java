@@ -2,11 +2,13 @@ package com.example.proyecto.Services;
 
 import com.example.proyecto.Repositories.UserRepository;
 import com.example.proyecto.Entities.UserEntity;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+@Data
 @Service
 public class UserService {
     @Autowired
