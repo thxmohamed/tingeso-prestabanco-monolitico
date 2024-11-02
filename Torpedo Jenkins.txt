@@ -2,3 +2,5 @@
 java -jar jenkins.war
 
 http://localhost:8080
+
+token github para  Jenkins: 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

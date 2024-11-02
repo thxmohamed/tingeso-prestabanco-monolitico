@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bdaf5ec7-ea4e-4704-bc96-b11c958389fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Torpedo Jenkins.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../Torpedo Jenkins.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Dockerfile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/proyecto/Controllers/CreditController.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/proyecto/Entities/CheckRulesEntity.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/proyecto/Entities/CreditEntity.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/example/proyecto/Services/CheckRulesService.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2mnI2Aw6q38CVJuJ8P96Lrfxf2j" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.CheckRulesServiceTest.executor": "Coverage",
+    "JUnit.CheckRulesServiceTest.whenApplicantAgeExceedsLimit_ThenRule6IsUpdatedToFalse.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenApplicantAgeWithinLimit_ThenRule6IsUpdatedToTrue.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckApplicantAge_WithNonExistentID_ThenDoNothing.executor": "Coverage",
+    "JUnit.CheckRulesServiceTest.whenCheckCreditHistory_WithFalseValue_ThenRule2IsUpdatedToFalse.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckCreditHistory_WithNonExistentCheckId_ThenThrowException.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckCreditHistory_WithTrueValue_ThenRule2IsUpdatedToTrue.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckDebtIncome_WithNonExistentCheckId_ThenThrowException.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckEmploymentStability_WithNonExistentCheckId_ThenThrowException.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckRelationQuotaIncome_SuccessAndQuotaExceeds35Percent.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCheckRelationQuotaIncome_SuccessAndQuotaWithin35Percent.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCreateRule_ThenOk.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenCreditOrUserEntityNotFound_ThenDoNothing.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenDebtIncomeAboveThreshold_ThenRule4IsUpdatedToFalse.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenDebtIncomeBelowThreshold_ThenRule4IsUpdatedToTrue.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenGetAllCheckRules_ThenOk.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenGetCheckRulesByCreditID_ThenReturnCheckRules.executor": "Run",
+    "JUnit.CheckRulesServiceTest.whenGetCheckRulesByID_ThenReturnCheckRules.executor": "Run",
+    "JUnit.CreditServiceTest.executor": "Run",
+    "JUnit.CreditServiceTest.whenDeleteCreditByID_ThenCreditNotFound.executor": "Run",
+    "JUnit.CreditServiceTest.whenGetByID_ThenCorrect.executor": "Run",
+    "JUnit.CreditServiceTest.whenGetCreditList_ThenCorrect.executor": "Run",
+    "JUnit.CreditServiceTest.whenGetMonthlyFee_ThenCorrect.executor": "Run",
+    "JUnit.CreditServiceTest.whenUpdateObservations_ThenCorrect.executor": "Run",
+    "JUnit.CreditServiceTest.whenUpdateStatus_ThenCorrect.executor": "Run",
+    "JUnit.DocumentServiceTest.executor": "Coverage",
+    "JUnit.DocumentServiceTest.whenCreditHasDocuments_ThenTrue.executor": "Run",
+    "JUnit.DocumentServiceTest.whenCreditHasNoDocuments_ThenFalse.executor": "Run",
+    "JUnit.DocumentServiceTest.whenDeleteDocument_ThenOk.executor": "Run",
+    "JUnit.DocumentServiceTest.whenGetAllCreditDocuments_ThenCorrect.executor": "Run",
+    "JUnit.DocumentServiceTest.whenGetAllCreditDocuments_ThenOk.executor": "Run",
+    "JUnit.DocumentServiceTest.whenGetDocumentByID_ThenOk.executor": "Run",
+    "JUnit.DocumentServiceTest.whenGetDocumentById_NotFound_ThenThrowException.executor": "Run",
+    "JUnit.DocumentServiceTest.whenGetDocumentList_ThenCorrect.executor": "Run",
+    "JUnit.DocumentServiceTest.whenSaveDocument_ThenOk.executor": "Run",
+    "JUnit.ProyectoApplicationTests.executor": "Run",
+    "JUnit.Services in proyecto.executor": "Coverage",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserServiceTest.whenGetUserList_ThenCorrect.executor": "Run",
+    "JUnit.UserServiceTest.whenRegisterUser_ThenCorrect.executor": "Run",
+    "Maven.proyecto [clean].executor": "Run",
+    "Maven.proyecto [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.ProyectoApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "corretto-17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/chifl/Desktop/Tingeso/backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.editor",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql",
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\chifl\Desktop\Tingeso\Evaluación 1\backend" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.proyecto.Controllers" />
+      <recent name="com.example.proyecto.Services" />
+      <recent name="com.example.proyecto.Repositories" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.Services in proyecto">
+    <configuration name="CreditServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proyecto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.proyecto.Services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.proyecto.Services" />
+      <option name="MAIN_CLASS_NAME" value="com.example.proyecto.Services.CreditServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreditServiceTest.whenGetCreditList_ThenCorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proyecto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.proyecto.Services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.proyecto.Services" />
+      <option name="MAIN_CLASS_NAME" value="com.example.proyecto.Services.CreditServiceTest" />
+      <option name="METHOD_NAME" value="whenGetCreditList_ThenCorrect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProyectoApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proyecto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.proyecto.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.proyecto" />
+      <option name="MAIN_CLASS_NAME" value="com.example.proyecto.ProyectoApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Services in proyecto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proyecto" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/example/proyecto/Services" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proyecto" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.proyecto.Services.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.proyecto.Services" />
+      <option name="MAIN_CLASS_NAME" value="com.example.proyecto.Services.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProyectoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_HOST" value="192.168.1.10" />
+        <env name="DB_HOST_U" value="192.168.83.158" />
+      </envs>
+      <module name="proyecto" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.proyecto.ProyectoApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.Services in proyecto" />
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.CreditServiceTest.whenGetCreditList_ThenCorrect" />
+        <item itemvalue="JUnit.CreditServiceTest" />
+        <item itemvalue="JUnit.ProyectoApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-11.0.21-corretto-11.0.21-f644763e9732-97de7592" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdaf5ec7-ea4e-4704-bc96-b11c958389fd" name="Changes" comment="" />
+      <created>1727705703228</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727705703228</updated>
+      <workItem from="1727705704308" duration="3185000" />
+      <workItem from="1727785509843" duration="52502000" />
+      <workItem from="1728391118331" duration="1407000" />
+      <workItem from="1728489042935" duration="101000" />
+      <workItem from="1728588590624" duration="1230000" />
+      <workItem from="1728665497133" duration="8152000" />
+      <workItem from="1728777293832" duration="54295000" />
+      <workItem from="1729615773347" duration="50341000" />
+      <workItem from="1730330530933" duration="31428000" />
+      <workItem from="1730561390660" duration="319000" />
+      <workItem from="1730561856762" duration="2822000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/backend$CheckRulesServiceTest_whenCheckApplicantAge_WithNonExistentID_ThenDoNothing.ic" NAME="CheckRulesServiceTest.whenCheckApplicantAge_WithNonExistentID_ThenDoNothing Coverage Results" MODIFIED="1730493237280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/backend$DocumentServiceTest_whenSaveDocument_ThenOk.ic" NAME="DocumentServiceTest.whenSaveDocument_ThenOk Coverage Results" MODIFIED="1730474697923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/backend$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1730494015799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/backend$CheckRulesServiceTest.ic" NAME="CheckRulesServiceTest Coverage Results" MODIFIED="1730493886174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/backend$CreditServiceTest.ic" NAME="CreditServiceTest Coverage Results" MODIFIED="1730493918369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/backend$Services_in_proyecto.ic" NAME="Services in proyecto Coverage Results" MODIFIED="1730563492679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/backend$DocumentServiceTest.ic" NAME="DocumentServiceTest Coverage Results" MODIFIED="1730493991460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.example.proyecto.Services.*</FILTER>
+    </SUITE>
+  </component>
+</project>
