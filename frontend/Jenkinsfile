@@ -16,7 +16,7 @@ pipeline{
                     script{
                          withDockerRegistry(credentialsId: 'docker-credentials'){
                             bat "docker build -t thxmohamed/frontend-container ."
-                            bat "docker push fabianlizama/frontend-container"
+                            bat "docker push thxmohamed/frontend-container"
                         }
                     }                    
                 }
