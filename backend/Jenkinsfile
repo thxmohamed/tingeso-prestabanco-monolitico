@@ -1,30 +1,37 @@
-pipeline{
+pipeline {
     agent any
-    tools{
-        maven "maven"
-
+    tools {
+        maven "maven"  // Asegúrate de que el nombre coincida con el Maven configurado en Jenkins
     }
-    stages{
-        stage("Build JAR File"){
-            steps{
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/thxmohamed/Tingeso']])
-                dir("backend"){
+    stages {
+        stage("Clone Repository") {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']],
+                                userRemoteConfigs: [[url: 'https://github.com/thxmohamed/Tingeso']])
+            }
+        }
+
+        stage("Build JAR File") {
+            steps {
+                dir("backend") {
                     bat "mvn clean install"
                 }
             }
         }
-        stage("Test"){
-            steps{
-                dir("backend"){
+
+        stage("Test") {
+            steps {
+                dir("backend") {
                     bat "mvn test"
                 }
             }
         }
-        stage("Build and Push Docker Image"){
-            steps{
-                dir("backend"){
-                    script{
-                         withDockerRegistry(credentialsId: 'docker-credentials'){
+
+        stage("Build and Push Docker Image") {
+            steps {
+                dir("backend") {
+                    script {
+                        withDockerRegistry(credentialsId: 'docker-credentials') {
                             bat "docker build -t thxmohamed/backend-container ."
                             bat "docker push thxmohamed/backend-container"
                         }
