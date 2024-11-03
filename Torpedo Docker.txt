@@ -55,9 +55,9 @@ ejecutarlo
 
 docker compose up -d
 
-bajar todo
+borrar todo
 
 docker compose down 
 
 en el navegador, el frontend está en
-http://localhost:8081/
+http://localhost:8090/

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import userService from '../services/user.service'; // Importar el servicio
-import Button from "@mui/material/Button"; // Importar el botón de Material UI
+import userService from '../services/user.service';
+import Button from "@mui/material/Button";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); // Para mostrar errores
+  const [error, setError] = useState(''); 
   const navigate = useNavigate();
 
   const goToRegister = () => {
@@ -17,7 +17,6 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      // Llamar a la función login de userService
       const response = await userService.login(email, password);
 
       if (response.status === 200) {
@@ -37,7 +36,7 @@ const Login = ({ onLogin }) => {
   return (
     <div style={styles.loginContainer}>
       <h1>Iniciar Sesión</h1>
-      {error && <p style={styles.errorMessage}>{error}</p>} {/* Mostrar el mensaje de error si existe */}
+      {error && <p style={styles.errorMessage}>{error}</p>}
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
           type="email"
