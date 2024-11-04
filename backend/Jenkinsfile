@@ -16,6 +16,32 @@ pipeline {
             }
         }
 
+        stage("Configure CORS in Backend") {
+            steps {
+                dir("backend/src/main/java/com/yourcompany/backend") { // Ajusta la ruta según la estructura del proyecto
+                    // Crear un archivo de configuración CORS para Spring Boot (si estás usando Spring)
+                    writeFile file: 'CorsConfig.java', text: '''\
+                    package com.yourcompany.backend;
+
+                    import org.springframework.context.annotation.Bean;
+                    import org.springframework.context.annotation.Configuration;
+                    import org.springframework.web.servlet.config.annotation.CorsRegistry;
+                    import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+                    @Configuration
+                    public class CorsConfig implements WebMvcConfigurer {
+                        @Override
+                        public void addCorsMappings(CorsRegistry registry) {
+                            registry.addMapping("/**")
+                                    .allowedOrigins("*")
+                                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                        }
+                    }
+                    '''
+                }
+            }
+        }
+
         stage("Build JAR File") {
             steps {
                 dir("backend") {
@@ -31,14 +57,18 @@ pipeline {
                 }
             }
         }
-
         stage("Build and Push Docker Image") {
             steps {
                 dir("backend") {
                     script {
                         withDockerRegistry(credentialsId: 'docker-credentials') {
-                            bat "docker build -t thxmohamed/backend-container ."
-                            bat "docker push thxmohamed/backend-container"
+                            withCredentials([string(credentialsId: 'docker-credentials', variable: 'DOCKER_PASS')]) {
+                                bat """
+                                    echo $DOCKER_PASS | docker login -u thxmohamed --password-stdin
+                                    docker build -t thxmohamed/backend-container .
+                                    docker push thxmohamed/backend-container
+                                """
+                            }
                         }
                     }
                 }
