@@ -10,20 +10,15 @@ pipeline{
                 }
             }
         }
-    stage("Build and Push Docker Image") {
-        steps {
-            dir("frontend") {
-                script {
-                    withDockerRegistry(credentialsId: 'docker-credentials') {
-                        withCredentials([string(credentialsId: 'docker-credentials', variable: 'DOCKER_PASS')]) {
-                            bat """
-                                echo $DOCKER_PASS | docker login -u thxmohamed --password-stdin
-                                docker build -t thxmohamed/frontend-container .
-                                docker push thxmohamed/frontend-container
-                            """
-                            }
+        stage("Build and Push Docker Image"){
+            steps{
+                dir("frontend"){
+                    script{
+                         withDockerRegistry(credentialsId: 'docker-credentials'){
+                            bat "docker build -t thxmohamed/frontend-container ."
+                            bat "docker push thxmohamed/frontend-container"
                         }
-                    }
+                    }                    
                 }
             }
         }
