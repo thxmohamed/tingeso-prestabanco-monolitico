@@ -19,7 +19,7 @@ pipeline {
         stage("Build JAR File") {
             steps {
                 dir("backend") {
-                    bat "mvn clean install"
+                    bat "mvn clean package"
                 }
             }
         }
