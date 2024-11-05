@@ -3,11 +3,6 @@ pipeline {
     tools {
         maven "maven"
     }
-    environment {
-        DB_HOST = "192.168.1.10"
-        DB_USER = "root2"
-        DB_PASSWORD = "mohamed123"
-    }
     stages {
         stage("Clone Repository") {
             steps {

@@ -5,6 +5,8 @@ http://localhost:8080
 
 token github para  Jenkins: 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
 
+ssh hktr@52.175.251.162
+
 usuario para azure: hktr
 contraseña: Mohamed12345
 ip publica: 52.175.251.162
