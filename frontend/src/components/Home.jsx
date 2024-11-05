@@ -28,7 +28,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="heading">Bienvenido a Préstamos PrestaBanco</h1>
+      <h1 className="heading">Bienvenido a Préstamos PrestaManueeeeel</h1>
       
       <button className="button" onClick={goToSimulate}>
         Simular un crédito
