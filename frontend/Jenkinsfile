@@ -10,6 +10,13 @@ pipeline{
                 }
             }
         }
+        stage("Verify Docker") {
+            steps {
+                script {
+                    bat "docker ps" // 
+                }
+            }
+        }
         stage("Build and Push Docker Image"){
             steps{
                 dir("frontend"){
