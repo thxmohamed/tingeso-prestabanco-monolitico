@@ -36,9 +36,7 @@ pipeline {
             steps {
                 dir("backend") {
                     script {
-                        // Utilizamos withCredentials para cargar las credenciales de Docker de Jenkins
-                        withCredentials([usernamePassword(credentialsId: 'docker-credentials-fixed', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                            // Iniciamos sesión en Docker con las credenciales seguras
+                        withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                             bat 'docker login -u "%DOCKER_USERNAME%" -p "%DOCKER_PASSWORD%" https://index.docker.io/v1/'
                             bat "docker build -t thxmohamed/backend-container ."
                             bat "docker push thxmohamed/backend-container"
