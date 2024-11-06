@@ -10,6 +10,8 @@ const CreditSimulate = () => {
     requestedAmount: ''
   });
   const [monthlyPayment, setMonthlyPayment] = useState(null);
+  const [administrationCommission, setAdministrationCommission] = useState(null);
+  const [yearsLimit, setYearsLimit] = useState(null);
   const [error, setError] = useState('');
 
   // Maneja los cambios en los inputs del formulario
@@ -30,7 +32,10 @@ const CreditSimulate = () => {
 
     try {
       const response = await creditService.simulate(form);
-      setMonthlyPayment(response.data); // Guardar el pago mensual en el estado
+      setMonthlyPayment(response.data + 0.0003*simulateResponse.data + 20);
+      setAdministrationCommission(form * 0.01);
+      setYearsLimit(form.yearsLimit);
+
     } catch (err) {
       setError('Hubo un error al simular el crédito. Inténtalo de nuevo.');
       console.error(err);
@@ -90,6 +95,8 @@ const CreditSimulate = () => {
       {monthlyPayment !== null && (
         <div className="result">
           <h2>La cuota mensual a pagar es de ${monthlyPayment.toFixed(2)}</h2>
+          <h2>La comision de administración a pagar es de ${administrationCommission.toFixed(2)}</h2>
+          <h2>El costo total del préstamo será de ${administrationCommission.toFixed(2) + (monthlyPayment*12*yearsLimit).toFixed(2)}</h2>
         </div>
       )}
     </div>
