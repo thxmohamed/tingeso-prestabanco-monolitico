@@ -32,8 +32,8 @@ const CreditSimulate = () => {
 
     try {
       const response = await creditService.simulate(form);
-      setMonthlyPayment(response.data + 0.0003*simulateResponse.data + 20);
-      setAdministrationCommission(form * 0.01);
+      setMonthlyPayment(response.data + 0.0003*response.data + 20);
+      setAdministrationCommission(form.requestedAmount * 0.01);
       setYearsLimit(form.yearsLimit);
 
     } catch (err) {
@@ -44,7 +44,7 @@ const CreditSimulate = () => {
 
   return (
     <div className="credit-simulate-container">
-      <h1>Simulación de Crédito</h1>
+      <h1>Simula tu Crédito</h1>
       
       <form onSubmit={handleSubmit}>
         <div>
@@ -96,7 +96,8 @@ const CreditSimulate = () => {
         <div className="result">
           <h2>La cuota mensual a pagar es de ${monthlyPayment.toFixed(2)}</h2>
           <h2>La comision de administración a pagar es de ${administrationCommission.toFixed(2)}</h2>
-          <h2>El costo total del préstamo será de ${administrationCommission.toFixed(2) + (monthlyPayment*12*yearsLimit).toFixed(2)}</h2>
+          <h2>El costo total del préstamo será de ${(administrationCommission + (monthlyPayment * 12 * yearsLimit)).toFixed(2)}</h2>
+
         </div>
       )}
     </div>
