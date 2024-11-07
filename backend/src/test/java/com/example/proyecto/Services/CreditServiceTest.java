@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -50,6 +51,13 @@ public class CreditServiceTest {
     }
 
     @Test
+    void whenSaveCreditWithNullEntity_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.saveCredit(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Credit entity cannot be null");
+    }
+
+    @Test
     void whenGetAllClientCredits_ThenCorrect(){
         user.setId(1L);
         CreditEntity credit1 = new CreditEntity();
@@ -65,6 +73,13 @@ public class CreditServiceTest {
     }
 
     @Test
+    void whenGetClientCreditsWithNullId_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.getClientCredits(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Client ID cannot be null");
+    }
+
+    @Test
     void whenGetMonthlyFee_ThenCorrect(){
         CreditEntity credit = new CreditEntity();
         credit.setInterestRate(2.3F);
@@ -77,6 +92,18 @@ public class CreditServiceTest {
     }
 
     @Test
+    void whenCreditSimulateWithInvalidData_ThenThrowsException() {
+        CreditEntity invalidCredit = new CreditEntity();
+        invalidCredit.setInterestRate(-1);
+        invalidCredit.setYearsLimit(0);
+        invalidCredit.setRequestedAmount(-100);
+
+        assertThatThrownBy(() -> creditService.creditSimulate(invalidCredit))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Invalid credit data for simulation");
+    }
+
+    @Test
     void whenGetByID_ThenCorrect(){
         CreditEntity credit = new CreditEntity();
         creditRepository.save(credit);
@@ -84,6 +111,13 @@ public class CreditServiceTest {
 
         CreditEntity found = creditService.findCreditByID(id);
         assertThat(found.getId()).isEqualTo(id);
+    }
+
+    @Test
+    void whenFindCreditByNullID_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.findCreditByID(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("ID cannot be null");
     }
 
     @Test
@@ -98,6 +132,13 @@ public class CreditServiceTest {
 
         Optional<CreditEntity> found = creditRepository.findById(2L);
         assertThat(found.isPresent()).isFalse();
+    }
+
+    @Test
+    void whenDeleteCreditByNullID_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.deleteCreditById(null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("ID cannot be null");
     }
 
     @Test
@@ -119,6 +160,17 @@ public class CreditServiceTest {
     }
 
     @Test
+    void whenUpdateCreditStatusWithNullValues_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.updateCreditStatus(null, CreditEntity.Status.E2_PENDIENTE_DOCUMENTACION))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("ID or status cannot be null");
+
+        assertThatThrownBy(() -> creditService.updateCreditStatus(1L, null))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("ID or status cannot be null");
+    }
+
+    @Test
     void whenUpdateObservations_ThenCorrect(){
         CreditEntity credit = new CreditEntity();
         credit.setObservations("this is not updated");
@@ -131,6 +183,13 @@ public class CreditServiceTest {
         CreditEntity updated = creditRepository.findById(id).orElseThrow();
 
         assertThat(updated.getObservations()).isEqualTo("this is updated");
+    }
+
+    @Test
+    void whenUpdateObservationsWithNullID_ThenThrowsException() {
+        assertThatThrownBy(() -> creditService.updateObservations(null, "Observation"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("ID cannot be null");
     }
 
 }
