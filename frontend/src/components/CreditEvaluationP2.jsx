@@ -123,7 +123,8 @@ const CreditEvaluationP2 = () => {
       if (optionalRulesPassedCount === 5) {
         // Todas las reglas (críticas y opcionales) son `true`, cambia a `E4_PRE_APROBADA`
         await creditService.updateStatus(creditID, "E4_PRE_APROBADA");
-        await creditService.updateObservations(creditID, "-");
+        observations = "";
+        await creditService.updateObservations(creditID, observations);
         alert("El crédito ha sido pre-aprobado.");
       } else if (optionalRulesPassedCount >= 3 && optionalRulesPassedCount <= 4) {
         // Si cumple con 3 o 4 de las 5 reglas opcionales, cambia a `E2_PENDIENTE_DOCUMENTACION`
