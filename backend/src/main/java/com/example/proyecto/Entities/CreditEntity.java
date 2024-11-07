@@ -39,7 +39,7 @@ public class CreditEntity {
         E6_APROBADA,
         E7_RECHAZADA,
         E8_CANCELADA_POR_CLIENTE,
-        E9_EN_DESEMBOLSO
+        APPROVED, E9_EN_DESEMBOLSO
     };
 
     private int propertyValue;

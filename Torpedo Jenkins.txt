@@ -38,4 +38,12 @@ iniciar sesión en MySQL
 docker exec -it mysql-container /bin/bash
 mysql -u root -p
 
+Procedimiento para cambiar algo:
+
+-bajar el docker
+-hacer el cambio
+-pushear a GitHub
+-construir el Jenkins correspondiente
+-hacer docker compose pull en la vm
+-hacer up de vuelta
 
