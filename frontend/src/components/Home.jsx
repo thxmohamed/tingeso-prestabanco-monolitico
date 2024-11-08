@@ -40,7 +40,7 @@ const Home = () => {
         Mi perfil
       </button>
       <button className="button" onClick={goToEvaluation}>
-        Evaluar solicitudes
+        Evaluar solicitudes (ejecutivo)
       </button>
       <button className="logout-button" onClick={handleLogout}>
         Cerrar sesión
