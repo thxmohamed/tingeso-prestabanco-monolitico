@@ -84,6 +84,17 @@ const CreditSimulate = () => {
           />
         </div>
 
+        <div>
+          <label>Holaaaa ($)</label>
+          <input
+            type="number"
+            name="requestedAmount"
+            value={form.requestedAmount}
+            required
+            placeholder="Ej. 10000"
+          />
+        </div>
+
         <button className='button'>Simular Crédito</button>
         <button className='button' onClick={handleBack}>
             Atrás
